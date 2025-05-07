@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "abhinavprakash783/endtermfrontend"
+        DOCKER_IMAGE = "abhinaprakash783/endtermfrontend"
         DOCKER_HUB_CREDENTIALS = "docker-hub-creds-v7"
         CONTAINER_NAME = "endtermfrontend"
         HOST_PORT = "8082"
