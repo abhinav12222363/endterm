@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "abhinavprakash783/premiumbagfrontend"
-        DOCKER_HUB_CREDENTIALS = "docker-hub-creds-v3"
+        DOCKER_HUB_CREDENTIALS = "docker-hub-creds-v7"
         CONTAINER_NAME = "premiumbagfrontend"
         HOST_PORT = "8082"
     }
