@@ -14,41 +14,39 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/abhinav12222363/endterm'
             }
         }
+
         stage('Build Docker Image') {
             steps {
-                script {
-                    bat "docker build -t %DOCKER_IMAGE% ."
-                }
+                bat "docker build -t %DOCKER_IMAGE% ."
             }
         }
+
         stage('Login to Docker Hub') {
             steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: "${DOCKER_HUB_CREDENTIALS}",
-                                                      usernameVariable: 'DOCKER_USERNAME',
-                                                      passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(
+                    credentialsId: env.DOCKER_HUB_CREDENTIALS,
+                    usernameVariable: 'DOCKER_USERNAME',
+                    passwordVariable: 'DOCKER_PASSWORD')]) {
                         bat "docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%"
-                    }
                 }
             }
         }
+
         stage('Push Docker Image') {
             steps {
-                script {
-                    bat "docker push %DOCKER_IMAGE%"
-                }
+                bat "docker push %DOCKER_IMAGE%"
             }
         }
+
         stage('Run Docker Container') {
             steps {
-                script {
-                    bat "docker stop %CONTAINER_NAME% || exit 0"
-                    bat "docker rm %CONTAINER_NAME% || exit 0"
-                    bat "docker run -d -p %HOST_PORT%:80 --name %CONTAINER_NAME% %DOCKER_IMAGE%"
-                }
+                bat "docker stop %CONTAINER_NAME% || exit 0"
+                bat "docker rm %CONTAINER_NAME% || exit 0"
+                bat "docker run -d -p %HOST_PORT%:80 --name %CONTAINER_NAME% %DOCKER_IMAGE%"
             }
         }
     }
+
     post {
         always {
             cleanWs()
