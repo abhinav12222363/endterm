@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "nightsight30/premiumbagfrontend"
+        DOCKER_IMAGE = "abhinavprakash783/premiumbagfrontend"
         DOCKER_HUB_CREDENTIALS = "docker-hub-creds-v3"
         CONTAINER_NAME = "premiumbagfrontend"
         HOST_PORT = "8082"
@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'master', url: 'https://github.com/nightsight30-sky/premiumbagFrontend'
+                git branch: 'main', url: 'https://github.com/abhinav12222363/endterm'
             }
         }
         stage('Build Docker Image') {
